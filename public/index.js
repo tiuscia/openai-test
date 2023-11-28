@@ -5,13 +5,15 @@ const createDescriptionForm = document.querySelector(".form-description")
 const generatedDescriptionHtml = document.querySelector(
   ".generated-description"
 )
-// const title
-// const image
+const generatedKWHtml = document.querySelector(".generated-keywords")
 
 createDescriptionForm.addEventListener("submit", async (e) => {
   // prevent page refresh on submit
   e.preventDefault()
   console.log("submit button clicked")
+
+  generatedDescriptionHtml.textContent = "loading..."
+  generatedKWHtml.textContent = "loading..."
 
   const res = await fetch("/openai/chat", {
     method: "POST",
@@ -19,12 +21,13 @@ createDescriptionForm.addEventListener("submit", async (e) => {
     body: JSON.stringify({ title: createDescriptionForm.title.value }),
   })
   const data = await res.json()
-
   console.log("data", data)
 
-  generatedDescriptionHtml.textContent = data.description.content
+  generatedDescriptionHtml.textContent = data?.description?.content
+  generatedKWHtml.textContent = data?.keywords?.content
 })
 
+// todo create form to generate OG image
 // createImageForm.addEventListener("submit", async (e) => {
 //   // prevent page refresh on submit
 //   e.preventDefault()

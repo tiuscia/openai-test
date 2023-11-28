@@ -3,6 +3,7 @@ const openai = require("../config/openAiConfig")
 const generateChatCompletion = async (req, res) => {
   const { title } = req.body
 
+  // generate meta description
   const chatCompletionDescription = await openai.chat.completions.create({
     model: "gpt-3.5-turbo",
     messages: [
@@ -13,8 +14,9 @@ const generateChatCompletion = async (req, res) => {
     ],
     max_tokens: 100,
   })
-  console.log(chatCompletionDescription.choices[0].message)
+  // console.log(chatCompletionDescription.choices[0].message)
 
+  // generate keywords
   const chatCompletionKw = await openai.chat.completions.create({
     model: "gpt-3.5-turbo",
     messages: [
@@ -25,11 +27,11 @@ const generateChatCompletion = async (req, res) => {
     ],
     max_tokens: 100,
   })
-  console.log(chatCompletionKw.choices[0].message)
+  console.log("kw", chatCompletionKw.choices[0].message)
 
   res.status(200).json({
-    description: chatCompletionDescription.choices[0].message,
-    keywords: chatCompletionKw.choices[0].message,
+    description: chatCompletionDescription?.choices[0]?.message,
+    keywords: chatCompletionKw?.choices[0]?.message,
   })
 }
 

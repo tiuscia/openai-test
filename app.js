@@ -1,10 +1,12 @@
 const express = require("express")
+// command line version
 // const readline = require("readline")
 const {
   generateChatCompletion,
   generateImage,
 } = require("./controllers/openAiController")
 
+// command line version
 // const rl = readline.createInterface({
 //   input: process.stdin,
 //   output: process.stdout,
