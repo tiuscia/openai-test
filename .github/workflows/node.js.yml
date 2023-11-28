@@ -20,8 +20,9 @@ jobs:
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
+    
     - run: node --version
     - run: npm --version
-    - uses: actions/checkout@v3
+    - uses: actions/setup-node@v3.3.0
     - run: npm install
     - run: node app
